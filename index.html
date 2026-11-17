@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRootAgent — Ultra-Lightweight CLI AI Coding Assistant (Rust)</title>
+  <meta name="description" content="CRootAgent adalah agen coding CLI berkinerja tinggi berbasis Rust dengan multi-API session (OpenAI, Claude, Gemini, Groq, Ollama), eksekusi perkakas cerdas, dan deteksi rilis otomatis dengan CrootJS.">
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#" class="brand">
+        <span class="brand-icon">🦀</span>
+        <span class="brand-text">CRootAgent</span>
+        <span class="badge badge-rust">Rust</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#fitur">Fitur</a>
+        <a href="#instalasi">Instalasi</a>
+        <a href="#panduan">Panduan</a>
+        <a href="#rilis">Rilis Terbaru</a>
+        <a href="https://github.com/CRootAgent/crootagent" target="_blank" rel="noopener" class="btn btn-sm btn-outline">GitHub ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        <span>Asisten Pengembang CLI Ultra-Ringan Berbasis Rust</span>
+      </div>
+      <h1 class="hero-title">
+        Coding Cepat Tanpa Beban Runtime.<br>
+        <span class="text-gradient">Multi-API, Multi-Sesi, & Hemat Memori.</span>
+      </h1>
+      <p class="hero-desc">
+        CRootAgent menggabungkan kekuatan model bahasa besar (OpenAI, Claude, Gemini, Groq, Ollama) dengan eksekusi perkakas lokal yang aman (HITL Safety). Hanya <strong>~10 MB RAM</strong> tanpa ketergantungan runtime Node.js atau Python.
+      </p>
+
+      <!-- Dynamic Download Card -->
+      <div class="download-cta">
+        <a id="btn-download-os" href="https://github.com/CRootAgent/crootagent/releases/latest" class="btn btn-primary btn-lg">
+          <span class="btn-icon">⬇</span>
+          <span id="label-download">Unduh CRootAgent Terbaru</span>
+        </a>
+        <span id="detected-os-badge" class="os-info">Mendeteksi sistem operasi Anda...</span>
+      </div>
+
+      <div class="quick-install-box">
+        <div class="quick-install-header">
+          <span class="term-dot red"></span>
+          <span class="term-dot yellow"></span>
+          <span class="term-dot green"></span>
+          <span class="term-title">Instalasi 1-Baris (Linux & macOS)</span>
+        </div>
+        <div class="quick-install-body">
+          <code>curl -fsSL https://crootagent.github.io/install.sh | bash</code>
+          <button id="btn-copy-curl" class="btn-copy" title="Salin perintah">Salin</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Release Status -->
+  <section id="rilis" class="section section-release">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Status Rilis GitHub Terbaru</h2>
+        <p class="section-subtitle">Data langsung diperbarui secara realtime dari GitHub API menggunakan modul <code>croot.js</code>.</p>
+      </div>
+
+      <div class="release-card" id="release-card-container">
+        <div class="release-info-grid">
+          <div class="info-block">
+            <span class="info-label">Versi Rilis</span>
+            <span id="release-tag" class="info-val info-tag">Memeriksa...</span>
+          </div>
+          <div class="info-block">
+            <span class="info-label">Tanggal Rilis</span>
+            <span id="release-date" class="info-val">-</span>
+          </div>
+          <div class="info-block">
+            <span class="info-label">Status Build Multi-OS</span>
+            <span class="info-val text-success">✔ Passing (Linux, macOS, Windows)</span>
+          </div>
+        </div>
+
+        <h3 class="table-title">Daftar Binary Siap Unduh</h3>
+        <div class="table-responsive">
+          <table class="assets-table">
+            <thead>
+              <tr>
+                <th>Sistem Operasi / Target</th>
+                <th>Nama Berkas</th>
+                <th>Ukuran</th>
+                <th>Tindakan</th>
+              </tr>
+            </thead>
+            <tbody id="assets-table-body">
+              <tr>
+                <td colspan="4" class="text-center">Mengambil daftar berkas rilis melalui CrootJS...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fitur Section -->
+  <section id="fitur" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Mengapa Memilih CRootAgent?</h2>
+        <p class="section-subtitle">Dirancang khusus untuk pengembang yang menuntut kecepatan, keamanan, dan efisiensi.</p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h3>Ultra-Ringan (Rust Native)</h3>
+          <p>Binary mandiri berukuran ringkas. Penggunaan memori <strong>~10 MB</strong> saat standby, jauh lebih efisien dibanding agen berbasis Node.js atau Python yang menyerap 150–300 MB RAM.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🌐</div>
+          <h3>Multi-API Session</h3>
+          <p>Dukungan penuh untuk Google Gemini, Anthropic Claude, OpenAI, Groq Cloud, dan Ollama lokal. Beralih model dan provider kapan saja tanpa kehilangan konteks percakapan.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🛡️</div>
+          <h3>Human-in-the-Loop (HITL) Safety</h3>
+          <p>Setiap tindakan bedah (mengubah berkas atau mengeksekusi perintah terminal) meminta persetujuan pengguna secara eksplisit sebelum dijalankan.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🔧</div>
+          <h3>Developer Tools Lengkap</h3>
+          <p>Dilengkapi perkakas ReAct bawaan: <code>read_file</code> (dengan nomor baris), <code>write_file</code>, <code>edit_file</code> (surgical patch), <code>run_command</code>, dan <code>list_dir</code>.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">💾</div>
+          <h3>Penyimpanan Sesi Persisten</h3>
+          <p>Setiap sesi percakapan otomatis tersimpan di mesin lokal. Anda dapat membuat sesi baru, melanjutkan sesi lama, atau mengekspornya ke format Markdown.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🚀</div>
+          <h3>Multi-OS CI/CD Pipeline</h3>
+          <p>Otomatisasi pengujian dan pembangunan berkas rilis untuk Linux x86_64, macOS Apple Silicon (arm64), macOS Intel, dan Windows x86_64 dengan GitHub Actions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Panduan Instalasi -->
+  <section id="instalasi" class="section section-dark">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Cara Instalasi</h2>
+        <p class="section-subtitle">Pilih metode instalasi yang paling sesuai dengan lingkungan kerja Anda.</p>
+      </div>
+
+      <div class="install-tabs">
+        <div class="install-method-card">
+          <h3>🍎 macOS & 🐧 Linux (Skrip Otomatis)</h3>
+          <p>Jalankan perintah ini di terminal Anda untuk mengunduh dan memasang binary terbaru secara otomatis:</p>
+          <pre><code>curl -fsSL https://crootagent.github.io/install.sh | bash</code></pre>
+        </div>
+
+        <div class="install-method-card">
+          <h3>🪟 Windows (PowerShell)</h3>
+          <p>Buka PowerShell dan jalankan perintah satu baris berikut:</p>
+          <pre><code>irm https://crootagent.github.io/install.ps1 | iex</code></pre>
+        </div>
+
+        <div class="install-method-card">
+          <h3>🦀 Cargo (Rust Toolchain)</h3>
+          <p>Bagi pengguna yang telah memiliki toolchain Rust/Cargo:</p>
+          <pre><code>cargo install --git https://github.com/CRootAgent/crootagent.git</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Panduan Pemakaian -->
+  <section id="panduan" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Panduan Pemakaian CLI</h2>
+        <p class="section-subtitle">Perintah dasar untuk menjalankan CRootAgent di terminal harian Anda.</p>
+      </div>
+
+      <div class="guide-grid">
+        <div class="guide-step">
+          <h4>1. Konfigurasi Kunci API</h4>
+          <p>Atur API Key provider pilihan Anda (atau gunakan environment variable):</p>
+          <pre><code># Konfigurasi via CLI
+crootagent config set default_provider groq
+crootagent config set groq_api_key "gsk_..."
+
+# Atau via Environment Variable
+export GEMINI_API_KEY="AIzaSy..."
+export OPENAI_API_KEY="sk-..."</code></pre>
+        </div>
+
+        <div class="guide-step">
+          <h4>2. Jalankan Mode Interaktif (REPL)</h4>
+          <p>Mulai sesi percakapan coding interaktif:</p>
+          <pre><code>crootagent
+
+# Di dalam REPL:
+crootagent> Buatkan file scraper.py dengan BeautifulSoup
+crootagent> /provider anthropic
+crootagent> /export</code></pre>
+        </div>
+
+        <div class="guide-step">
+          <h4>3. Mode One-Shot (Eksekusi Instan)</h4>
+          <p>Perintahkan agen untuk menyelesaikan satu tugas langsung dari terminal:</p>
+          <pre><code>crootagent "Periksa file main.rs dan cari potensi bug memory leak"
+
+# Otomatis konfirmasi perkakas (tanpa prompt tanya jawab)
+crootagent -y "Jalankan cargo test dan jelaskan hasilnya"</code></pre>
+        </div>
+
+        <div class="guide-step">
+          <h4>4. Manajemen Sesi</h4>
+          <p>Kelola riwayat sesi percakapan Anda:</p>
+          <pre><code># Lihat semua sesi
+crootagent session list
+
+# Lanjutkan sesi tertentu
+crootagent --session &lt;SESSION_ID&gt;
+
+# Hapus sesi lama
+crootagent session delete &lt;SESSION_ID&gt;</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <p class="footer-title"><strong>CRootAgent</strong> — Asisten Pengembang CLI Ultra-Ringan</p>
+        <p class="footer-meta">Laporan & Produk Proyek 2 D4TI ULBI Bandung 2026</p>
+        <p class="footer-author">Pengembang: <strong>Ahmad Zakky Nurfauzan</strong> (NIM: <strong>714250028</strong>)</p>
+      </div>
+      <div class="footer-right">
+        <p>Dibangun menggunakan <a href="https://www.rust-lang.org/" target="_blank" rel="noopener">Rust</a> & <a href="https://croot.js.org/" target="_blank" rel="noopener">CrootJS</a></p>
+        <p><a href="https://github.com/CRootAgent/crootagent" target="_blank" rel="noopener">Repository GitHub ↗</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CrootJS ES Module Entry Point -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
