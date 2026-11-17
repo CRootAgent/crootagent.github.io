@@ -83,6 +83,35 @@ fi
 mv "$TMP_DIR/crootagent" "$INSTALL_DIR/crootagent"
 
 echo "${GREEN}${BOLD}✔ Berhasil memasang CRootAgent ke ${INSTALL_DIR}/crootagent!${RESET}"
+
+# Pastikan direktori instalasi terdaftar pada variabel PATH
+SHELL_NAME="$(basename "${SHELL:-/bin/bash}")"
+RC_FILE=""
+if [ "$SHELL_NAME" = "zsh" ]; then
+  RC_FILE="$HOME/.zshrc"
+elif [ "$SHELL_NAME" = "bash" ]; then
+  if [ -f "$HOME/.bashrc" ]; then
+    RC_FILE="$HOME/.bashrc"
+  elif [ -f "$HOME/.bash_profile" ]; then
+    RC_FILE="$HOME/.bash_profile"
+  fi
+fi
+
+if [[ ":$PATH:" != *":$INSTALL_DIR:"* ]]; then
+  if [ -n "$RC_FILE" ] && [ -w "$RC_FILE" ]; then
+    if ! grep -q "$INSTALL_DIR" "$RC_FILE" 2>/dev/null; then
+      echo "" >> "$RC_FILE"
+      echo "# CRootAgent binary path" >> "$RC_FILE"
+      echo "export PATH=\"$INSTALL_DIR:\$PATH\"" >> "$RC_FILE"
+      echo "${YELLOW}Menambahkan ${INSTALL_DIR} ke ${RC_FILE}.${RESET}"
+    fi
+  fi
+  echo ""
+  echo "${YELLOW}${BOLD}PENTING:${RESET} Direktori instalasi belum aktif di sesi terminal ini."
+  echo "Jalankan perintah berikut sebelum memanggil crootagent:"
+  echo "  ${CYAN}source ${RC_FILE:-~/.zshrc}${RESET}  (atau: ${CYAN}export PATH=\"$INSTALL_DIR:\$PATH\"${RESET})"
+fi
+
 echo ""
 echo "Jalankan ${CYAN}${BOLD}crootagent${RESET} untuk memulai sesi interaktif pertama Anda."
 echo "Panduan lengkap tersedia di: https://crootagent.github.io"
